@@ -1,0 +1,138 @@
+@font-face {
+    font-family: raleway_f;
+    src: url("../fonts/raleway-regular.woff2");
+}
+@font-face {
+    font-family: raleway_f;
+    src: url("../fonts/raleway-black.woff2");
+    font-weight: 900;
+}
+$parallaxArticle: calc(var(--scrollTop) / -7.5);
+$parallaxBase: calc(var(--scrollTop) / 1.6);
+$parallaxMiddle: calc(var(--scrollTop) / 2.5);
+$parallaxFront: calc(var(--scrollTop) / 5.7);
+$parallaxHeader: calc(var(--scrollTop) / 2);
+$index: calc(1vw + 1vh);
+$text: #e7e7e0;
+$transition: transform .75 cubic-bezier(.075, .500, .000, 1.000);
+
+body {
+    background: #010101;
+    color: #fff;
+    font-family: raleway_f, sans-serif;
+    line-height: 1.55;
+}
+.main-header {
+    position: relative;
+    &:after {
+        content: '';
+        position: absolute;
+        z-index: 100;
+        width: 100%;
+        height: calc($index * 10);
+        background-image: url(../img/ground.png);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        bottom: calc($index * -4.5);
+    }
+}
+
+.layers {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    transition: $transition;
+    will-change: transform;
+
+    &__caption {
+        font-size: calc($index / 1.175);
+        letter-spacing: calc($index / 3.5);
+        margin-top: calc($index * -.75);
+    }
+    &__title {
+        font-size: calc($index * 2.5);
+        letter-spacing: calc($index / 2.25);
+    }
+
+    &__middle {
+        transform: translate3d(0, $parallaxMiddle, 0);
+        z-index: 2;
+    }
+
+    &__base {
+        transform: translate3d(0, $parallaxBase, 0);
+        z-index: 0;
+    }
+
+    &__front {
+        transform: translate3d(0, $parallaxFront, 0);
+        z-index: 2;
+    }
+}
+
+.layer {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-size: cover;
+    background-position: center;
+    will-change: transform;
+    transition: $transition;
+    &__header {
+        transform: translate3d(0, $parallaxHeader, 0);
+        will-change: transform;
+        transition: $transition;
+        font-weight: 900;
+        text-transform: uppercase;
+        color: $text;
+        text-shadow: 0 0 15px #9d822b;
+        z-index: 1;
+    }
+}
+
+
+.main-article {
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    color: $text;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+
+    &__content {}
+
+    &__header {
+        text-transform: uppercase;
+        font-size: calc($index * 1.8);
+        letter-spacing: calc($index / 7.5);
+        transform: translate3d(0, $parallaxArticle, 0);
+        transition: $transition;
+        will-change: transform;
+    }
+    &__paragraph {
+        max-width: calc($index * 28);
+        font-size: calc($index * .9);
+        margin-top: calc($index / 1.25);
+        transform: translate3d(0, $parallaxArticle, 0);
+        transition: $transition;
+        will-change: transform;
+    }
+}
+.content{
+    will-change: transform;
+}
+.copy {
+    position: absolute;
+    bottom: calc($index * 2.5);
+    opacity: .45;
+    font-size: calc($index * .75);
+    letter-spacing: calc($index / 37.5);
+}
